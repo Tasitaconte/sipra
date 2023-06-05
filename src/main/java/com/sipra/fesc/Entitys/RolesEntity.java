@@ -44,4 +44,13 @@ public class RolesEntity {
         this.nombre = nombre;
     }
 
+    public List<UsuarioEntity> getEntidadRolList() {
+        return entidadRolList;
+    }
+
+    public void setEntidadRolList(List<UsuarioEntity> entidadRolList) {
+        this.entidadRolList = entidadRolList;
+    }
+
+
 }

@@ -1,21 +1,12 @@
-package com.sipra.fesc.Shared;
+package com.sipra.fesc.Models.Respuestas;
 
-import java.io.Serializable;
-
-public class EmpresaDto implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class EmpresaDataRestModel {
+    
     private long id;
     private String idEmpresa;
     private String nombre;
     private String empresa;
     private String telefono;
-    private String nit;
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
 
     public long getId() {
         return id;
@@ -47,14 +38,6 @@ public class EmpresaDto implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
     }
 
     public String getIdEmpresa() {

@@ -16,6 +16,7 @@ public class FescApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FescApplication.class, args);
+		System.out.println("Corriendo....");
 	}
 	@Bean
 	public ModelMapper modelMapper() {

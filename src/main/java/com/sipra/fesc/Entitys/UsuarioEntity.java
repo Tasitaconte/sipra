@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -48,23 +49,12 @@ public class UsuarioEntity implements Serializable {
     @Column(nullable = false)
     private String passwordEncriptada;
 
-    @Column(nullable = false)
-    private String restauranteEmpleado;
-
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private RolesEntity entidadRol;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entidadUsuario")
-    private List<EmpresaEntity> empresaEntityList = new ArrayList<>();
-
-    public String getRestauranteEmpleado() {
-        return restauranteEmpleado;
-    }
-
-    public void setRestauranteEmpleado(String restauranteEmpleado) {
-        this.restauranteEmpleado = restauranteEmpleado;
-    }
+    private List<ConexionEntity> conexionEntitieslList = new ArrayList<>();
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -141,4 +131,13 @@ public class UsuarioEntity implements Serializable {
     public void setEntidadRol(RolesEntity entidadRol) {
         this.entidadRol = entidadRol;
     }
+
+    public List<ConexionEntity> getConexionEntitieslList() {
+        return conexionEntitieslList;
+    }
+
+    public void setConexionEntitieslList(List<ConexionEntity> conexionEntitieslList) {
+        this.conexionEntitieslList = conexionEntitieslList;
+    }
+
 }

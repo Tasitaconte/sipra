@@ -1,20 +1,26 @@
 package com.sipra.fesc.Entitys;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "empresas")
 public class EmpresaEntity {
-    
+
     private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false, length = 100)
+    private String idEmpresa;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -24,10 +30,12 @@ public class EmpresaEntity {
 
     @Column(nullable = false, length = 100)
     private String numero;
+    
+    @Column(nullable = false, length = 100)
+    private String nit;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private UsuarioEntity entidadUsuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaEntity")
+    private List<ConexionEntity> entidadConexionEntities = new ArrayList<>();
 
     public static Long getSerialversionuid() {
         return serialVersionUID;
@@ -65,11 +73,28 @@ public class EmpresaEntity {
         this.numero = numero;
     }
 
-    public UsuarioEntity getEntidadUsuario() {
-        return entidadUsuario;
+    public List<ConexionEntity> getEntidadConexionEntities() {
+        return entidadConexionEntities;
     }
 
-    public void setEntidadUsuario(UsuarioEntity entidadUsuario) {
-        this.entidadUsuario = entidadUsuario;
+    public void setEntidadConexionEntities(List<ConexionEntity> entidadConexionEntities) {
+        this.entidadConexionEntities = entidadConexionEntities;
     }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(String idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
 }
