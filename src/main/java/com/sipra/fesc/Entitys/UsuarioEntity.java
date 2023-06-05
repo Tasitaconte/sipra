@@ -1,22 +1,19 @@
 package com.sipra.fesc.Entitys;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import java.io.Serializable;
-
-// import jakarta.persistence.CascadeType;
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-// import jakarta.persistence.OneToMany;
-
-// import java.io.Serializable;
-// import java.util.ArrayList;
-// import java.util.List;
-
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "usuario")
 @Table(indexes = {
@@ -57,6 +54,9 @@ public class UsuarioEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private RolesEntity entidadRol;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entidadUsuario")
+    private List<EmpresaEntity> empresaEntityList = new ArrayList<>();
 
     public String getRestauranteEmpleado() {
         return restauranteEmpleado;

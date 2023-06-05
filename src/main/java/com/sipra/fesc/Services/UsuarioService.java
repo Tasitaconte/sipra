@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sipra.fesc.Entitys.RolesEntity;
@@ -17,6 +18,7 @@ import com.sipra.fesc.Repositories.IRolRepository;
 import com.sipra.fesc.Repositories.IUsuarioRepository;
 import com.sipra.fesc.Shared.UsuarioDto;
 
+@Service
 public class UsuarioService implements IUsuarioService {
 
     @Autowired
