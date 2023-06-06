@@ -30,12 +30,10 @@ public class EmpresaController {
         EmpresaDto empresaCrearDto = modelMapper.map(empresaCrearRestModel, EmpresaDto.class);
         return iEmpresaService.crearEmpresa(empresaCrearDto);
     }
-
+    
     @GetMapping("/AllEmpresas")
     public List<EmpresaDataRestModel> getEmpresaAll(){
         return iEmpresaService.getEmpresas();
     }
-
-    
 
 }
