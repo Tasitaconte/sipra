@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sipra.fesc.Entitys.RolesEntity;
 import com.sipra.fesc.Entitys.UsuarioEntity;
+import com.sipra.fesc.Models.Peticiones.UsuarioBusquedaRestModel;
 import com.sipra.fesc.Models.Respuestas.UsuarioDataRestModel;
 import com.sipra.fesc.Repositories.IRolRepository;
 import com.sipra.fesc.Repositories.IUsuarioRepository;
@@ -71,4 +72,19 @@ public class UsuarioService implements IUsuarioService {
        
         return usersDataRestModel;
     }
+
+    @Override
+    public UsuarioDataRestModel getUsuarioCedula(UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
+
+       UsuarioEntity usuarioEntity = iUserRepository.findByCc(usuarioBusquedaRestModel.getCc());
+
+       if (usuarioEntity == null) {
+            throw new UsernameNotFoundException("No encontrado");
+       }
+
+       UsuarioDataRestModel usuarioDataRestModel = modelMapper.map(usuarioEntity,UsuarioDataRestModel.class );
+
+       return usuarioDataRestModel;
+    }
+    
 }

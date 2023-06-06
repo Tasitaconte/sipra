@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface IUsuarioRepository extends CrudRepository<UsuarioEntity, Long> {
     UsuarioEntity findById(long id);
 
+    UsuarioEntity findByCc(String cc);
+
     UsuarioEntity findByIdUser(String id);
 
     List<UsuarioEntity> findAll();

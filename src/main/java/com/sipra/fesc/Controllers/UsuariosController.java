@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sipra.fesc.Models.Peticiones.UsuarioBusquedaRestModel;
 import com.sipra.fesc.Models.Peticiones.UsuarioCrearRestModel;
 import com.sipra.fesc.Models.Respuestas.UsuarioDataRestModel;
 import com.sipra.fesc.Services.IUsuarioService;
@@ -32,14 +34,37 @@ public class UsuariosController {
 
     @PostMapping("/{idRol}")
     public UsuarioDataRestModel crearUser(@RequestBody UsuarioCrearRestModel usuarioDataRestModel,
-            @PathVariable Long idRol){
+            @PathVariable Long idRol) {
         UsuarioDto userCrearDto = modelMapper.map(usuarioDataRestModel, UsuarioDto.class);
         return iUserService.crearUser(userCrearDto, idRol.longValue());
     }
-    
+
     @GetMapping("/estudiantes")
     public List<UsuarioDataRestModel> leerEstudiantes() {
         return iUserService.leerEstudiantes();
     }
-    
+
+    @GetMapping("/usuarioBusqueda/docente")
+    public UsuarioDataRestModel BusquedaUsuarioDocente(@RequestBody UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
+        UsuarioDataRestModel usuarioDataRestModel = iUserService.getUsuarioCedula(usuarioBusquedaRestModel);
+
+        if (usuarioDataRestModel.getEntidadRol().getId() != 1) {
+            throw new UsernameNotFoundException("No es docente");
+        }
+
+        return usuarioDataRestModel;
+    }
+
+    @GetMapping("/usuarioBusqueda/estudiante")
+    public UsuarioDataRestModel BusquedaUsuarioEstudiante(@RequestBody UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
+        UsuarioDataRestModel usuarioDataRestModel = iUserService.getUsuarioCedula(usuarioBusquedaRestModel);
+
+        if (usuarioDataRestModel.getEntidadRol().getId() != 2) {
+            throw new UsernameNotFoundException("No es estudiante");
+        }
+
+        return usuarioDataRestModel;
+    }
+
+
 }
