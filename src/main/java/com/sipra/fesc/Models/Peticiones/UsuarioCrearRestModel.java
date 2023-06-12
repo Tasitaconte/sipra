@@ -8,6 +8,15 @@ public class UsuarioCrearRestModel {
     private String celular;
     private String email;
     private String password;
+    private String programa;
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
 
     public String getNombre() {
         return nombre;

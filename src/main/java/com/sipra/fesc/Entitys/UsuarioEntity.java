@@ -49,6 +49,9 @@ public class UsuarioEntity implements Serializable {
     @Column(nullable = false)
     private String passwordEncriptada;
 
+    @Column(nullable = false)
+    private String programa;
+
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private RolesEntity entidadRol;

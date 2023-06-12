@@ -1,6 +1,7 @@
 package com.sipra.fesc.Models.Peticiones;
 
 public class UsuarioActualizarRestModel {
+    
     private String nombre;
     private String apellido;
     private String celular;

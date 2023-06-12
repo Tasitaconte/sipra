@@ -1,7 +1,7 @@
 package com.sipra.fesc.Models.Respuestas;
 
 public class UsuarioDataRestModel {
-    
+
     private long id;
     private String idUser;
     private String nombre;
@@ -9,9 +9,13 @@ public class UsuarioDataRestModel {
     private String apellido;
     private String celular;
     private String cc;
+    private String programa;
     private RolDataRestModel entidadRol;
 
-    
+    public String getPrograma() {
+        return programa;
+    }
+
     public String getApellido() {
         return apellido;
     }

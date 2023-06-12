@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sipra.fesc.Models.Peticiones.LoginUserDataRestModel;
 import com.sipra.fesc.Models.Peticiones.UsuarioBusquedaRestModel;
 import com.sipra.fesc.Models.Peticiones.UsuarioCrearRestModel;
 import com.sipra.fesc.Models.Respuestas.UsuarioDataRestModel;
@@ -47,23 +48,24 @@ public class UsuariosController {
     @GetMapping("/usuarioBusqueda/docente")
     public UsuarioDataRestModel BusquedaUsuarioDocente(@RequestBody UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
         UsuarioDataRestModel usuarioDataRestModel = iUserService.getUsuarioCedula(usuarioBusquedaRestModel);
-
         if (usuarioDataRestModel.getEntidadRol().getId() != 1) {
             throw new UsernameNotFoundException("No es docente");
         }
-
         return usuarioDataRestModel;
     }
 
     @GetMapping("/usuarioBusqueda/estudiante")
     public UsuarioDataRestModel BusquedaUsuarioEstudiante(@RequestBody UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
         UsuarioDataRestModel usuarioDataRestModel = iUserService.getUsuarioCedula(usuarioBusquedaRestModel);
-
         if (usuarioDataRestModel.getEntidadRol().getId() != 2) {
             throw new UsernameNotFoundException("No es estudiante");
         }
-
         return usuarioDataRestModel;
+    }
+
+    @GetMapping("/login")
+    public boolean login(@RequestBody LoginUserDataRestModel loginUserDataRestModel) {
+        return true;
     }
 
 

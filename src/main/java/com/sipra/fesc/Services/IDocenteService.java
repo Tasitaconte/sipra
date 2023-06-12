@@ -5,6 +5,6 @@ import com.sipra.fesc.Shared.UsuarioDto;
 
 public interface IDocenteService {
     
-    UsuarioDataRestModel actualizarDocente(UsuarioDto usuarioactDto);
+    UsuarioDataRestModel actualizarDocente(UsuarioDto usuarioactDto, String idUsuario);
 
 }

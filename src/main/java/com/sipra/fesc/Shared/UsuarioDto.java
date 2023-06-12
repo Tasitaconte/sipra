@@ -13,8 +13,17 @@ public class UsuarioDto implements Serializable {
     private String celular;
     private String cc;
     private String password;
+    private String programa;
     private String passwordEncriptada;
     private RolDto entidadRol;
+
+    public String getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(String programa) {
+        this.programa = programa;
+    }
 
     public static long getSerialversionuid() {
         return serialVersionUID;

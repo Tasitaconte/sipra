@@ -9,6 +9,8 @@ import com.sipra.fesc.Shared.UsuarioDto;
 public interface IUsuarioService {
     public UsuarioDataRestModel crearUser(UsuarioDto userCrearDto, Long id);
 
+    public boolean login(UsuarioDto usuarioDto);
+
     public List<UsuarioDataRestModel> leerEstudiantes();
 
     public UsuarioDataRestModel getUsuarioCedula(UsuarioBusquedaRestModel usuarioBusquedaRestModel);

@@ -3,6 +3,7 @@ package com.sipra.fesc.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,22 +17,18 @@ import com.sipra.fesc.Shared.UsuarioDto;
 @RestController
 @RequestMapping("/docente")
 public class DocenteController {
-    
+
     @Autowired
     IDocenteService iDocenteService;
 
     @Autowired
     ModelMapper modelMapper;
-    // @Autowired
-    
 
-    @PostMapping("/actualizar/docente")
-    public UsuarioDataRestModel actualizarDocente(@RequestBody UsuarioActualizarRestModel usuarioActualizarRestModel) {
-        // return UsuarioDataRestModel usuarioDataRestModel;
+    @PostMapping("/actualizar/docente/{idUsuario}")
+    public UsuarioDataRestModel actualizarDocente(@RequestBody UsuarioActualizarRestModel usuarioActualizarRestModel,
+            @PathVariable String idUsuario) {
         UsuarioDto usuarioActuDto = modelMapper.map(usuarioActualizarRestModel, UsuarioDto.class);
-        // return iDocenteService.
-        
-        throw new UsernameNotFoundException(null, null);
+        return iDocenteService.actualizarDocente(usuarioActuDto, idUsuario);
     }
-   
+
 }

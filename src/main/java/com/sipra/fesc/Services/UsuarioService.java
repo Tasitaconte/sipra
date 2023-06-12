@@ -69,22 +69,31 @@ public class UsuarioService implements IUsuarioService {
             UsuarioDataRestModel userDto = modelMapper.map(userEntidad, UsuarioDataRestModel.class);
             usersDataRestModel.add(userDto);
         }
-       
+
         return usersDataRestModel;
     }
 
     @Override
     public UsuarioDataRestModel getUsuarioCedula(UsuarioBusquedaRestModel usuarioBusquedaRestModel) {
-
-       UsuarioEntity usuarioEntity = iUserRepository.findByCc(usuarioBusquedaRestModel.getCc());
-
-       if (usuarioEntity == null) {
+        UsuarioEntity usuarioEntity = iUserRepository.findByCc(usuarioBusquedaRestModel.getCc());
+        if (usuarioEntity == null) {
             throw new UsernameNotFoundException("No encontrado");
-       }
-
-       UsuarioDataRestModel usuarioDataRestModel = modelMapper.map(usuarioEntity,UsuarioDataRestModel.class );
-
-       return usuarioDataRestModel;
+        }
+        UsuarioDataRestModel usuarioDataRestModel = modelMapper.map(usuarioEntity, UsuarioDataRestModel.class);
+        return usuarioDataRestModel;
     }
-    
+
+    @Override
+    public boolean login(UsuarioDto usuarioDto) {
+
+        UsuarioEntity usuarioEntity = iUserRepository.findByEmail(usuarioDto.getEmail());
+        if (usuarioEntity == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado");
+        }
+        if (bCryptPasswordEncoder.matches(usuarioDto.getPassword(), usuarioEntity.getPasswordEncriptada())) {
+            return true;
+        }
+        return false;
+    }
+
 }
